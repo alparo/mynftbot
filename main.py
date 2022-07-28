@@ -1,10 +1,11 @@
 import telebot
-import config
+import os
 import random
 
 from telebot import types
 
-bot = telebot.TeleBot(config.TOKEN)
+TOKEN = os.environ["TOKEN"]
+bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
