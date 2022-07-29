@@ -7,6 +7,7 @@ from telebot import types
 TOKEN = os.environ["TOKEN"]
 bot = telebot.TeleBot(TOKEN)
 
+
 @bot.message_handler(commands=['start'])
 def welcome(message):
 	sti = open('static/welcome.webp', 'rb')
@@ -21,6 +22,7 @@ def welcome(message):
 
 	bot.send_message(message.chat.id, "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный чтобы быть подопытным кроликом.".format(message.from_user, bot.get_me()),
 		parse_mode='html', reply_markup=markup)
+
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
@@ -38,6 +40,7 @@ def lalala(message):
 			bot.send_message(message.chat.id, 'Отлично, сам как?', reply_markup=markup)
 		else:
 			bot.send_message(message.chat.id, 'Я не знаю что ответить 😢')
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -58,6 +61,7 @@ def callback_inline(call):
 
 	except Exception as e:
 		print(repr(e))
+
 
 # RUN
 print("Running the bot")
