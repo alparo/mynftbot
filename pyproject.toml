@@ -6,7 +6,8 @@ authors = ["alparo <amparo.dios@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pyTelegramBotAPI = "^4.6.1"
+pyTelegramBotAPI = "^4.7"
+loguru = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 
