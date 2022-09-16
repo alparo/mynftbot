@@ -1,3 +1,5 @@
+import time
+
 import telebot
 import os
 import random
@@ -7,6 +9,34 @@ from telebot import types
 TOKEN = os.environ["TOKEN"]
 bot = telebot.TeleBot(TOKEN)
 
+
+test_list = ["d6287ca146f235564732a78ea9ad0a3665830f5d6cd71ea7f0e98e901ccc97a2",
+			 "3ca701cbe6027ad9d882dd794a4421956648dcb1d284b79cfc65ba74a9e2fa7a",
+			 "fb10f00379ee39ba194b1e632cf756e64dd5cfa0cdb4eb88e03ee7a977292616",
+			 "2df5c6319d6086633e90955f833cf52083863a1efe6b16c0c33fade14b3dba7f"]
+
+def prepare_list_of_links(tx_list: list) -> str:
+	result_list = ''
+	for tx in tx_list:
+		result_list += f'[{tx[0:8]}](https://waxblock.io/transaction/{tx})\n'
+	return result_list
+
+
+@bot.message_handler(commands=['link'])
+def send_link(message):
+	bot.send_message(message.chat.id,
+		f"NFTs were sent. Here are TX links:\n"
+		f"{prepare_list_of_links(test_list)}",
+		parse_mode='markdown', disable_web_page_preview=True)
+
+
+@bot.message_handler(commands=['timer'])
+def timer(message):
+	bot.send_message(message.chat.id,
+		f"started timer for 5 seconds",)
+	time.sleep(5)
+	bot.send_message(message.chat.id,
+		f"timer stopped",)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
